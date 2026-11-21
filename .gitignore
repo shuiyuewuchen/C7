@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+__MACOSX/
+.AppleDouble
+
+# 渲染脚本产生的临时文件
+.*-????
+
+# Python / 编辑器
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+
+# 系统
+Thumbs.db

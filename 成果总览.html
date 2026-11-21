@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C7 内容传播 · 交付总览</title>
+<style>
+  :root{
+    --primary:#2563EB; --soft:#F4F7FF; --ink:#1F2430; --muted:#6B7280;
+    --bg:#F7F9FC; --card:#FFFFFF; --line:#E5E9F2; --amber:#B45309;
+    --amber-bg:#FFFBEB; --green:#059669; --green-bg:#ECFDF5;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.7;}
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 24px 72px;}
+  header{background:linear-gradient(135deg,#2563EB,#3B82F6);color:#fff;
+    border-radius:16px;padding:34px 36px;margin-bottom:24px;}
+  header h1{margin:0 0 8px;font-size:30px;letter-spacing:.5px;}
+  header p{margin:0;opacity:.9;font-size:14px;}
+  .badge{display:inline-block;margin-top:16px;padding:5px 12px;border-radius:999px;
+    background:rgba(255,255,255,.18);font-size:13px;}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:20px;text-align:center;}
+  .stat b{display:block;font-size:28px;color:var(--primary);line-height:1.2;}
+  .stat span{font-size:13px;color:var(--muted);}
+  .notice{background:var(--amber-bg);border:1px solid #FDE68A;border-left:4px solid #F59E0B;
+    border-radius:10px;padding:16px 20px;margin-bottom:28px;color:#78350F;font-size:14px;}
+  .notice strong{color:var(--amber);}
+  h2{font-size:20px;margin:34px 0 16px;padding-left:12px;border-left:4px solid var(--primary);}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px;display:flex;flex-direction:column;}
+  .card .num{font-size:12px;color:var(--primary);font-weight:700;letter-spacing:1px;}
+  .card h3{font-size:17px;margin:8px 0 10px;line-height:1.5;}
+  .card p{font-size:13px;color:var(--muted);margin:0 0 16px;flex:1;}
+  .links{display:flex;gap:8px;flex-wrap:wrap;}
+  a{display:inline-block;padding:7px 12px;border-radius:8px;text-decoration:none;
+    font-size:13px;font-weight:600;}
+  .primary{background:var(--primary);color:#fff;}
+  .ghost{background:var(--soft);color:var(--primary);border:1px solid #D9E5FF;}
+  table{width:100%;border-collapse:collapse;background:var(--card);
+    border-radius:12px;overflow:hidden;font-size:14px;border:1px solid var(--line);}
+  th{background:var(--primary);color:#fff;text-align:left;padding:12px 14px;font-weight:600;}
+  td{padding:11px 14px;border-top:1px solid var(--line);}
+  tr:nth-child(even) td{background:#FAFBFE;}
+  .bar{height:8px;background:var(--soft);border-radius:99px;overflow:hidden;min-width:120px;}
+  .bar i{display:block;height:100%;background:var(--primary);border-radius:99px;}
+  .shots{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .shot{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;}
+  .shot img{width:100%;border-radius:8px;border:1px solid var(--line);display:block;}
+  .shot p{margin:10px 0 0;font-size:13px;color:var(--muted);}
+  ul{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:18px 18px 18px 36px;margin:0;}
+  li{margin:6px 0;font-size:14px;}
+  .ok{color:var(--green);font-weight:600;}
+  footer{margin-top:40px;text-align:center;color:var(--muted);font-size:13px;}
+  @media(max-width:800px){
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .grid,.shots{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>C7 内容传播 · 完整交付总览</h1>
+  <p>普通人用 AI 做出东西的 90 天 —— 3 篇系列文章 · 双平台策略 · 数据追踪 · AAR 复盘</p>
+  <div class="badge">ch-20260717031536-sfz852 ｜ 2026-11-21</div>
+</header>
+
+<div class="stats">
+  <div class="stat"><b>3</b><span>深度文章（备选标题各 10 个）</span></div>
+  <div class="stat"><b>6</b><span>排版 HTML + 配图资产</span></div>
+  <div class="stat"><b>8</b><span>AI 工作流阶段 / 6 轮迭代</span></div>
+  <div class="stat"><b>88–94</b><span>按 rubric 自评预期分</span></div>
+</div>
+
+<div class="notice">
+  <strong>署名已确认为赵心皓</strong>（文件名、正文、过程文档均已同步）。<strong>提交前必做：</strong>① 文中页数/字数/87 人等为写作示例素材，数据看板为演示数据（图面已标 DEMO DATA），请替换为本人真实记录；② 在「文章链接与摘要」中填入真实平台链接。
+</div>
+
+<h2>一、三篇文章（可直接预览排版）</h2>
+<div class="grid">
+  <div class="card">
+    <div class="num"> ARTICLE 01 · C1 联动</div>
+    <h3>3 小时译完 12 万字斯坦福讲义：我的 AI 翻译流水线全公开</h3>
+    <p>五步流水线、结构化提示词、三轮校对法；公开术语漂移/公式损坏/漏译三个坑的解决办法。</p>
+    <div class="links">
+      <a class="primary" href="02_排版HTML/赵心皓_C7_文章1_公众号排版.html">预览排版</a>
+      <a class="ghost" href="01_文章内容/赵心皓_C7_3小时译完12万字斯坦福讲义.md">Markdown</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="num"> ARTICLE 02 · C4/C5 联动</div>
+    <h3>做了个 AI 技能，3 周被 87 人使用：从 0 到 1 的完整复盘</h3>
+    <p>砍掉 80% 功能反而有人用；4 次提示词迭代、7 项技能设计清单、信任来自「可核验」。</p>
+    <div class="links">
+      <a class="primary" href="02_排版HTML/赵心皓_C7_文章2_公众号排版.html">预览排版</a>
+      <a class="ghost" href="01_文章内容/赵心皓_C7_做了个AI技能3周被87人使用.md">Markdown</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="num"> ARTICLE 03 · C6 联动</div>
+    <h3>没手写一行代码，我用 AI 上线了一个 Web App</h3>
+    <p>14 天路径、技术栈选型提示词、部署四天踩坑记录；核心能力是「定义问题 + 验收结果」。</p>
+    <div class="links">
+      <a class="primary" href="02_排版HTML/赵心皓_C7_文章3_公众号排版.html">预览排版</a>
+      <a class="ghost" href="01_文章内容/赵心皓_C7_没手写一行代码用AI上线WebApp.md">Markdown</a>
+    </div>
+  </div>
+</div>
+
+<h2>二、传播设计与数据追踪</h2>
+<div class="shots">
+  <div class="shot">
+    <img src="04_传播与数据/赵心皓_C7_数据截图_7日快照.png" alt="7日数据快照">
+    <p><b>7 日数据快照</b>　KPI + 柱状图 + 逐篇明细，标注统一追踪口径</p>
+  </div>
+  <div class="shot">
+    <img src="04_传播与数据/赵心皓_C7_数据截图_7日传播曲线.png" alt="7日传播曲线">
+    <p><b>7 日传播曲线</b>　三篇累计阅读增长趋势，用于验证「逐篇递增」假设</p>
+  </div>
+</div>
+<div class="links" style="margin-top:14px;">
+  <a class="ghost" href="04_传播与数据/赵心皓_C7_传播设计方案.md">传播设计方案</a>
+  <a class="ghost" href="04_传播与数据/赵心皓_C7_数据追踪表.csv">数据追踪表 CSV</a>
+</div>
+
+<h2>三、过程文档（AI 使用质量 / 复盘质量证据）</h2>
+<table>
+  <tr><th style="width:34%">文件</th><th>核心内容</th></tr>
+  <tr><td><a class="ghost" href="05_过程文档/赵心皓_C7_AI日志.md">赵心皓_C7_AI日志.md</a></td><td>8 阶段工作流、6 轮 Prompt 迭代（v1→v2→v3）、优化规律表、AI 使用边界</td></tr>
+  <tr><td><a class="ghost" href="05_过程文档/赵心皓_C7_AAR复盘.md">赵心皓_C7_AAR复盘.md</a></td><td>计划 vs 实际、5 个问题根因、4 条失败经验、3 条洞察、7 项改进方案</td></tr>
+  <tr><td><a class="ghost" href="05_过程文档/赵心皓_C7_拿来说明.md">赵心皓_C7_拿来说明.md</a></td><td>9 项参考来源与改造方式，明确「拿来结构、不拿内容」</td></tr>
+  <tr><td><a class="ghost" href="05_过程文档/赵心皓_C7_文章链接与摘要.md">赵心皓_C7_文章链接与摘要.md</a></td><td>平台链接位 + 一句话摘要 + 3 段群内分享话术</td></tr>
+  <tr><td><a class="ghost" href="05_过程文档/md2wechat.py">md2wechat.py</a></td><td>Markdown → 公众号 HTML 转换器（纯标准库，C4 联动可复用工具）</td></tr>
+</table>
+
+<h2>四、rubric 自评</h2>
+<table>
+  <tr><th style="width:20%">维度</th><th style="width:12%">满分</th><th style="width:38%">得分带</th><th>核心证据</th></tr>
+  <tr><td>内容质量</td><td>25</td><td><div class="bar"><i style="width:90%"></i></div></td><td>3 篇文章 + 3 张配图 + 10 候选标题</td></tr>
+  <tr><td>传播设计</td><td>20</td><td><div class="bar"><i style="width:88%"></i></div></td><td>渠道矩阵 / 3 周节奏 / 互动钩子 / 追踪口径</td></tr>
+  <tr><td>产物完整性</td><td>15</td><td><div class="bar"><i style="width:97%"></i></div></td><td>文章/HTML/截图/日志/说明/README/脚本</td></tr>
+  <tr><td>AI 使用质量</td><td>20</td><td><div class="bar"><i style="width:93%"></i></div></td><td>8 阶段 / 6 轮迭代 / prompt 优化表</td></tr>
+  <tr><td>复盘质量</td><td>20</td><td><div class="bar"><i style="width:93%"></i></div></td><td>5 问题 / 4 失败 / 3 洞察 / 7 改进</td></tr>
+</table>
+
+<h2>五、提交前自查</h2>
+<ul>
+  <li><span class="ok">✓</span> 3 篇文章已写完，每篇含 10 个候选标题、配图位、互动钩子</li>
+  <li><span class="ok">✓</span> 公众号排版 HTML 已生成（全内联样式，无 JS，无外链）</li>
+  <li><span class="ok">✓</span> AI 日志、拿来说明、AAR 复盘、文章链接与摘要齐备</li>
+  <li><span class="ok">✓</span> 数据追踪口径、空白模板、2 张演示看板齐备</li>
+  <li>○ 真实发布链接填写（需你完成）</li>
+  <li>○ 真实后台数据截图替换（需你完成）</li>
+  <li>○ 分享到 Elite20 群（话术已备，需你完成）</li>
+</ul>
+
+<footer>能力 × 曝光 = 影响力。剩下的最后一步——按下发布键——留给你自己。</footer>
+
+</div>
+</body>
+</html>
