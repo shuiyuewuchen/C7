@@ -1,5 +1,27 @@
 import AppKit
 import CoreGraphics
+import Foundation
+
+// 数据配置：由 05_过程文档/rebuild_dashboard.py 生成；缺失时回退内置演示数据
+struct Cfg {
+    static let dict: [String: Any] = {
+        let p = "04_传播与数据/dashboard_data.json"
+        guard let d = try? Data(contentsOf: URL(fileURLWithPath: p)),
+              let j = (try? JSONSerialization.jsonObject(with: d)) as? [String: Any] else {
+            return [:]
+        }
+        return j
+    }()
+    static func str(_ k: String, _ fallback: String) -> String {
+        return (dict[k] as? String) ?? fallback
+    }
+    static func num(_ v: Any?) -> CGFloat {
+        if let n = v as? NSNumber { return CGFloat(n.doubleValue) }
+        if let s = v as? String { return CGFloat(Double(s) ?? 0) }
+        return 0
+    }
+    static func isDemo() -> Bool { return str("watermark", "DEMO DATA") == "DEMO DATA" }
+}
 
 let W: CGFloat = 1200, H: CGFloat = 700
 let ctx = CGContext(data: nil, width: Int(W), height: Int(H), bitsPerComponent: 8,
@@ -27,33 +49,46 @@ func txt(_ s: String, _ x: CGFloat, _ top: CGFloat, _ size: CGFloat, _ c: NSColo
 box(0, 0, W, H, NSColor(calibratedRed: 0.965, green: 0.973, blue: 0.988, alpha: 1), 0)
 box(0, 0, W, 80, blue, 0)
 txt("C7 内容传播 · 7 日传播曲线", 34, 20, 24, .white, true)
-txt("演示数据 · 累计阅读量随发布时间的变化", 34, 50, 14,
+txt(Cfg.str("subtitleCurve", "演示数据 · 累计阅读量随发布时间的变化"), 34, 50, 14,
     NSColor(calibratedRed: 0.85, green: 0.91, blue: 1.0, alpha: 1))
-txt("DEMO DATA", W - 160, 30, 16, .white, true)
+txt(Cfg.str("watermark", "DEMO DATA"), W - 160, 30, 16, .white, true)
 
 box(34, 100, 1132, 520, .white, 12)
 txt("三篇累计阅读量（发布后 1–7 天）", 56, 120, 17, ink, true)
-txt("斜率变化：第 2 篇起加入群内转发引导，第 3 篇叠加知乎分流与跨篇导流", 56, 146, 13, muted)
+txt(Cfg.isDemo()
+    ? "斜率变化：第 2 篇起加入群内转发引导，第 3 篇叠加知乎分流与跨篇导流"
+    : "斜率变化：以公众号后台真实逐日数据为准", 56, 146, 13, muted)
 
-let left: CGFloat = 90, right: CGFloat = 1130
-let baseY: CGFloat = 570, topY: CGFloat = 200
-let maxV: CGFloat = 1000
-for v in stride(from: 0, through: 1000, by: 200) {
-    let y = baseY - CGFloat(v) / maxV * (baseY - topY)
-    ctx.move(to: CGPoint(x: left, y: H - y)); ctx.addLine(to: CGPoint(x: right, y: H - y))
-    ctx.setStrokeColor(lineCol.cgColor); ctx.setLineWidth(1); ctx.strokePath()
-    txt("\(v)", 52, y - 14, 12, muted)
-}
-for d in 1...7 {
-    let x = left + CGFloat(d - 1) / 6 * (right - left)
-    txt("第\(d)天", x - 18, baseY + 12, 12, muted)
-}
-
-let series: [(String, [CGFloat], NSColor)] = [
+var series: [(String, [CGFloat], NSColor)] = [
     ("第1篇 翻译", [320, 380, 430, 470, 500, 520, 540], blue),
     ("第2篇 技能", [480, 580, 660, 720, 770, 800, 820], orange),
     ("第3篇 WebApp", [610, 740, 840, 900, 940, 965, 980], teal)
 ]
+if let sc = Cfg.dict["series"] as? [[String: Any]], !sc.isEmpty {
+    let palette = [blue, orange, teal]
+    series = sc.enumerated().map { (i, s) in
+        let daily = (s["daily"] as? [Any] ?? []).map { Cfg.num($0) }
+        return (s["name"] as? String ?? "", daily.isEmpty ? [0] : daily,
+                palette[min(i, palette.count - 1)])
+    }
+}
+let peak = series.flatMap { $0.1 }.max() ?? 1000
+let maxV: CGFloat = Cfg.isDemo() ? 1000 : max(1000, (peak * 1.15 / 200).rounded(.up) * 200)
+
+let left: CGFloat = 90, right: CGFloat = 1130
+let baseY: CGFloat = 570, topY: CGFloat = 200
+for i in 0...5 {
+    let v = maxV / 5 * CGFloat(i)
+    let y = baseY - v / maxV * (baseY - topY)
+    ctx.move(to: CGPoint(x: left, y: H - y)); ctx.addLine(to: CGPoint(x: right, y: H - y))
+    ctx.setStrokeColor(lineCol.cgColor); ctx.setLineWidth(1); ctx.strokePath()
+    txt("\(Int(v))", 52, y - 14, 12, muted)
+}
+for day in 1...7 {
+    let x = left + CGFloat(day - 1) / 6 * (right - left)
+    txt("第\(day)天", x - 18, baseY + 12, 12, muted)
+}
+
 for s in series {
     var pts: [CGPoint] = []
     for (i, v) in s.1.enumerated() {
@@ -78,10 +113,17 @@ for (i, s) in series.enumerated() {
     box(x, 166, 18, 12, s.2, 3)
     txt(s.0, x + 26, 164, 13, ink)
 }
-txt("说明：以上为演示用示例数据，用于展示追踪口径与趋势呈现方式；正式提交前请替换为公众号/知乎后台真实数据。", 34, 648, 13, muted)
+let noteText = Cfg.str("noteCurve", "说明：以上为演示用示例数据，用于展示追踪口径与趋势呈现方式；正式提交前请替换为公众号/知乎后台真实数据。")
+let noteChars = Array(noteText)
+if noteChars.count > 60 {
+    txt(String(noteChars.prefix(60)), 34, 642, 12, muted)
+    txt(String(noteChars.dropFirst(60).prefix(60)), 34, 664, 12, muted)
+} else {
+    txt(noteText, 34, 648, 13, muted)
+}
 
 guard let img = ctx.makeImage() else { exit(2) }
 let url = URL(fileURLWithPath: "04_传播与数据/赵心皓_C7_数据截图_7日传播曲线.png")
 let d = CGImageDestinationCreateWithURL(url as CFURL, "public.png" as CFString, 1, nil)!
 CGImageDestinationAddImage(d, img, nil); CGImageDestinationFinalize(d)
-print("OK curve")
+print("OK curve [\(Cfg.str("watermark", "DEMO DATA"))]")
